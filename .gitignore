@@ -1,7 +1,7 @@
 # PyCharm settings
-
 .idea/
 
-#Python virtual environment 
-
+#Python virtual environment
 venv/
+
+__pycache__/
