@@ -1,5 +1,5 @@
 from pytube import YouTube
-from tkinter import filedialog
+
 
 class YouTubeDownloader:
     def download_video_mp4(self, url, path):
@@ -24,9 +24,5 @@ class YouTubeDownloader:
         except Exception as e:
             print(e)
 
-    def open_save_location(self):
-        folder = filedialog.askdirectory()
-        if folder:
-            print(f"Saving to: {folder}")
-        return folder
+
 
