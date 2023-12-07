@@ -10,7 +10,7 @@ def open_save_location():
 
 if __name__ == '__main__':
     root = tk.Tk()
-    #root.withdraw()
+    root.withdraw()
     downloader = YouTubeDownloader()
 
     video_url = input("Enter URL:")
