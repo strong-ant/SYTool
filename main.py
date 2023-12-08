@@ -13,11 +13,19 @@ if __name__ == '__main__':
     root.withdraw()
     downloader = YouTubeDownloader()
 
-    video_url = input("Enter URL:")
-    save_path = open_save_location()
+    #Main Menu
 
-    if save_path:
-        print("Downloading...")
-        downloader.download_video_mp4(video_url, save_path)
-    else:
-        print("Invalid Directory")
+    while True:
+
+        userInput = input("Enter a URL or q to quit\n")
+
+        if(userInput.lower() == 'q'):
+            break
+        else:
+            video_url = input("Enter URL:")
+            save_path = open_save_location()
+            if save_path:
+                print("Downloading...")
+                downloader.download_video_mp4(video_url, save_path)
+            else:
+                print("Invalid Directory")
