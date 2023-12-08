@@ -13,19 +13,19 @@ if __name__ == '__main__':
     root.withdraw()
     downloader = YouTubeDownloader()
 
+    print("Welcome to SYTool")
+    print("----------------")
+
     #Main Menu
-
     while True:
+        print("\nPlease make a choice: ")
+        print("1. Download YouTube video or audio")
+        print("q to quit")
+        menuChoice = input("\n")
 
-        userInput = input("Enter a URL or q to quit\n")
-
-        if(userInput.lower() == 'q'):
+        if menuChoice == "1":
+            downloader.downloadMenu()
+        elif menuChoice.lower() == "q":
             break
         else:
-            video_url = input("Enter URL:")
-            save_path = open_save_location()
-            if save_path:
-                print("Downloading...")
-                downloader.download_video_mp4(video_url, save_path)
-            else:
-                print("Invalid Directory")
+            print("Invalid Choice")
