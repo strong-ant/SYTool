@@ -1,12 +1,5 @@
 from youtubeDownload import YouTubeDownloader
 import tkinter as tk
-from tkinter import filedialog
-
-def open_save_location():
-    folder = filedialog.askdirectory()
-    if folder:
-        print(f"Saving to: {folder}")
-    return folder
 
 if __name__ == '__main__':
     root = tk.Tk()
@@ -14,7 +7,7 @@ if __name__ == '__main__':
     downloader = YouTubeDownloader()
 
     print("Welcome to SYTool")
-    print("----------------")
+    print("-----------------")
 
     #Main Menu
     while True:

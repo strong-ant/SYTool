@@ -1,6 +1,6 @@
 from pytube import YouTube
 from tkinter import filedialog
-import tkinter as tk
+
 
 class YouTubeDownloader:
     def download_video_mp4(self, url, path):
