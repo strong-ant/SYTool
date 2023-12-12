@@ -3,7 +3,8 @@ from tkinter import filedialog
 
 
 class YouTubeDownloader:
-    def download_video_mp4(self, url, path):
+    @staticmethod
+    def download_video_mp4(url, path):
         try:
             video = YouTube(url)
             #retrieve all video streams for a video
@@ -35,12 +36,14 @@ class YouTubeDownloader:
         except Exception as e:
             print(e)
 
-    def open_save_location(self):
+    @staticmethod
+    def open_save_location():
         folder = filedialog.askdirectory()
         if folder:
             print(f"Saving to: {folder}")
         return folder
-    def downloadMenu(self):
+
+    def download_menu(self):
         while True:
             userInput = input("Enter a URL or q for Main Menu\n")
 
