@@ -23,6 +23,8 @@ if __name__ == '__main__':
             downloader.download_menu()
         elif menuChoice == "2":
             sptools.playlist()
+        elif menuChoice == "3":
+            print('test')
         elif menuChoice.lower() == "q":
             break
         else:
