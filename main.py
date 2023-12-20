@@ -24,7 +24,7 @@ if __name__ == '__main__':
         elif menuChoice == "2":
             sptools.playlist()
         elif menuChoice == "3":
-            print('test')
+            sptools.ytsearch()
         elif menuChoice.lower() == "q":
             break
         else:
