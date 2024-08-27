@@ -60,7 +60,28 @@ class YouTubeTools:
             return response['id']
         except HttpError as e:
             print(f"An error occurred: {e}")
-        return None
+            return None
+    
+    def add_to_playlist(self, youtube, playlist_id, video_id):
+        try:
+            request = youtube.playlistItems().insert(
+                part="snippet",
+                body={
+                    "snippet": {
+                        "playlistId": playlist_id,
+                        "resourceId": {
+                            "kind": "youtube#video",
+                            "videoId": video_id
+                        }
+                    }
+                }
+            )
+            response = request.execute()
+            return response['id'] #returns the id of the video in the playlist
+        except HttpError as e:
+            print(f"An error occurred: {e}")
+            return None
+    
     
     @staticmethod
     def playlist_id_to_url(id) -> str:
@@ -69,18 +90,23 @@ class YouTubeTools:
         
     
     
-    def ytsearch(self):
-        query = input("Enter a video name:\n")
-        request = youtube.search().list(
-            part = 'snippet',
-            q = query,
-            type = "video",
-            maxResults = 1,
-        )
-        response = request.execute()
-        if 'items' in response and len(response['items']) > 0:
-            video_id = response['items'][0]['id']['videoId']
-            video_link = f"https://www.youtube.com/watch?v={video_id}"
-            print(video_link)
-        else:
-            print("none")
+    def ytsearch(self, query):
+        try:
+            request = youtube.search().list(
+                part = 'snippet',
+                q = query,
+                type = "video",
+                maxResults = 1,
+            )
+            response = request.execute()
+            if 'items' in response and len(response['items']) > 0:
+                video_id = response['items'][0]['id']['videoId']
+                video_link = f"https://www.youtube.com/watch?v={video_id}"
+                print(video_link)
+                return video_id
+            else:
+                print(f"No video found for {query}")
+                return None
+        except HttpError as e:
+            print(f"An error occurred: {e}")
+            return None

@@ -1,6 +1,6 @@
 import spotipy
 import requests
-
+from typing import List
 from spotipy.oauth2 import SpotifyClientCredentials
 
 from config import SPOTIPY_CLIENT_SECRET, SPOTIPY_CLIENT_ID
@@ -48,16 +48,24 @@ class SpotifyTools:
     def get_playlist_id(uri) -> str:
         return uri.split(':')[-1]
 
-    def playlist(self):
-        playlist_url = input("Enter a Spotify Playlist URL:\n")
+    #returns a list of the queries that will be used to search on youtube
+    def get_playlist_queries(self, playlist_url) -> List[str]:
         playlist_uri = self.uri_to_url(playlist_url)
         if playlist_uri == "":
-            return
+            return []
         try:
+            queries = []
+            #obtain playlist items from spotify
             pl = spotify.playlist_items(playlist_id=self.get_playlist_id(playlist_uri))
+            
             for track in pl['items']:
-                track_name = track['track']['name']
-                print(track_name)
+                track_str = track['track']['name']
+                #append artist name to track string
+                for artist in track['track']['artists']:
+                    track_str += f" {artist['name']}"
+                #append to track string in the format of [track_name] [track_artist] ... [track_artist]
+                queries.append(track_str)
+            return queries
         except Exception as e:
             print("Unexpected Error:\n", e)
 
