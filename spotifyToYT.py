@@ -1,16 +1,19 @@
 import spotipy
 import requests
+
 from spotipy.oauth2 import SpotifyClientCredentials
 
-import youtubeDownload
-from config import SPOTIPY_CLIENT_SECRET, SPOTIPY_CLIENT_ID, YOUTUBE_API_KEY
+from config import SPOTIPY_CLIENT_SECRET, SPOTIPY_CLIENT_ID
 from googleapiclient.discovery import build
 
-from youtubeDownload import YouTubeDownloader
+
 
 client_credentials_manager = SpotifyClientCredentials(client_id=SPOTIPY_CLIENT_ID, client_secret=SPOTIPY_CLIENT_SECRET)
 spotify = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
-youtube = build('youtube', 'v3', developerKey=YOUTUBE_API_KEY)
+
+
+
+
 class SpotifyTools:
 
     def validate_spotify_url(self, url) -> bool:  # check if repsonse code is 200
@@ -58,26 +61,6 @@ class SpotifyTools:
         except Exception as e:
             print("Unexpected Error:\n", e)
 
-    def ytsearch(self):
-        query = input("Enter a video name:\n")
-
-        request = youtube.search().list(
-            part = 'snippet',
-            q = query,
-            type = "video",
-            maxResults = 1,
-        )
-        response = request.execute()
-        if 'items' in response and len(response['items']) > 0:
-            video_id = response['items'][0]['id']['videoId']
-            video_link = f"https://www.youtube.com/watch?v={video_id}"
-            downloader = YouTubeDownloader()
-            path = downloader.open_save_location()
-            if path:
-                downloader.download_video_mp4(video_link, path)
-            else:
-                print("no directory chosen")
-        else:
-            print("none")
 
 
+    
